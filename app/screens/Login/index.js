@@ -10,6 +10,8 @@ export interface Props {
 export interface State {}
 class Login extends React.Component<Props, State> {
 	render() {
+		const {navigate} = this.props.navigation;
+
 		return (
 			<Container style={{backgroundColor: "#fff"}}>
 			<Image source={require('./../../../images/login_store_img.jpeg')} style={{height: 200, width: null}}/>
