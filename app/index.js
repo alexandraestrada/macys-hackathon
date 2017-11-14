@@ -4,15 +4,15 @@ import { Root } from "native-base";
 import Login from './screens/Login';
 
 
-const App = StackNavigator(
-    {
-        Login: { screen: Login },
+const App = StackNavigator({
+        Login: { 
+            screen: Login 
+        },
     }, 
     {
         initialRouteName: "Login",
         headerMode: "none",
-    }
-);
+    });
 
 export default () => ( 
     <Root >

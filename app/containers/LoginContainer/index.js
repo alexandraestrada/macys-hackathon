@@ -2,7 +2,7 @@
 import * as React from "react";
 import { Item, Input, Icon, Toast, Form } from "native-base";
 import { Field, reduxForm } from "redux-form";
-import Home from "../../screens/Home";
+import Login from "../../screens/Login";
 
 const required = value => (value ? undefined : "Required");
 const maxLength = max => value => (value && value.length > max ? `Must be ${max} characters or less` : undefined);
@@ -60,7 +60,7 @@ class LoginForm extends React.Component<Props, State> {
 				/>
 			</Form>
 		);
-		return <Home navigation={this.props.navigation} loginForm={form} onLogin={() => this.login()} />;
+		return <Login navigation={this.props.navigation} loginForm={form} onLogin={() => this.login()} />;
 	}
 }
 const LoginContainer = reduxForm({
