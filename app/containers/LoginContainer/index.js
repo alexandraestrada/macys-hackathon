@@ -1,5 +1,5 @@
 // @flow
-import * as React from "react";
+import React from "react";
 import { Item, Input, Icon, Toast, Form } from "native-base";
 import { Field, reduxForm } from "redux-form";
 import Login from "../../screens/Login";
