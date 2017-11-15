@@ -5,11 +5,26 @@ import {
   Text,
   View
 } from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, List, ListItem, Thumbnail, Left, Right} from 'native-base';
+import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, List, ListItem, Thumbnail, Left, Right, Input, Item} from 'native-base';
 
 
 export interface State {}
 class Pricing extends React.Component<Props, State> {
+	constructor() {
+      super()
+      this.state = {
+         myText: 'Enter details of your question'
+      }
+   	}
+
+    updateTextNeedManager = () => {
+      this.setState({myText: 'I need a price override'})
+   	}
+
+   	updateTextCouponExemption = () => {
+   		this.setState({myText: 'I need to apply a coupon exemption'})
+   	}
+
 	render() {
 		const {navigate} = this.props.navigation;
 
@@ -24,14 +39,18 @@ class Pricing extends React.Component<Props, State> {
 
 					<View style={{flex:1, flexDirection: 'column', justifyContent: 'center', marginLeft: 10, marginTop: 20}}>
 						<Button style={styles.option} >
-							<Text style={styles.optionText} >I need a manager for price override</Text>
+							<Text style={styles.optionText} onPress = {this.updateTextNeedManager}>I need a price override</Text>
 						</Button>
 						<Button style={styles.option} >
-							<Text style={styles.optionText}>I need to apply a coupon exemption</Text>
+							<Text style={styles.optionText} onPress = {this.updateTextCouponExemption}>I need to apply a coupon exemption</Text>
 						</Button>
 						<Button style={styles.option} >
 							<Text style={styles.optionText}>Other</Text>
 						</Button>
+
+						<Item regular style={styles.message}>
+							<Input placeholder={this.state.myText} />
+						</Item>
 
 						<Button style={styles.send}>
 							<Text style={styles.sendText} >Send to Manager</Text>
@@ -64,7 +83,7 @@ const styles = StyleSheet.create({
   },
   option:{
     backgroundColor: '#F4F6F8',
-    height: 100,
+    height: 60,
     width: 335,
     margin: 10,
     flex: 1,
@@ -87,7 +106,13 @@ const styles = StyleSheet.create({
   sendText: {
   	color: 'white',
   	fontSize: 20,
-  }
+  },
+  message: {
+  	width: 335,
+  	height: 150,
+  	marginLeft: 13,
+  	marginTop: 10,
+  },
 });
 
 export default Pricing;
