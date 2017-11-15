@@ -41,7 +41,23 @@ class New_Question extends React.Component<Props, State> {
                     </ListItem>
                 </List>
 
-				<Image source={require('./../../../images/envelope_image.svg')} style={{height: 500}}/>
+	            <Footer style={styles.footer}>
+	                <FooterTab>
+	                    <Button>
+	                    <Text>Open Issues</Text>
+	                    </Button>
+	                    <Button>
+	                    <Text>Closed Issues</Text>
+	                    </Button>
+	                    <Button active>
+	                    <Text>Navigate</Text>
+	                    </Button>
+	                    <Button>
+	                    <Text>Contact</Text>
+	                    </Button>
+	                </FooterTab>
+	            </Footer>
+
                 </Content>
 			</Container>
 		);
@@ -84,6 +100,11 @@ const styles = StyleSheet.create({
   list:{
     marginTop: -50,
   },
+  footer: {
+  	flex: 1,
+  	flexDirection: "column",
+  	justifyContent: 'flex-end',
+  }
 });
 
 export default New_Question;
