@@ -2,28 +2,12 @@ import * as React from "react";
 import { Image, Platform } from "react-native";
 import { Container, Content, Header, Item, Body, Title, Button, Text, View, Icon, Footer, Form, Input } from "native-base";
 
-class Login extends React.Component {
+export interface Props {
+	loginForm: any,
+	onLogin: Function,
+}
 
-	constructor() {
-    super()
-    this.state = {
-       text: ''
-    }
-    this.loginUser = this.loginUser.bind(this);
- 	}
-
-	loginUser() {
-		return fetch('https://young-brook-73094.herokuapp.com/api/users/' + this.state.text)
-			.then((response) => response.json())
-			.then(responseJson => {
-				if (responseJson[0].accountType === 'Associate') {
-					this.props.navigation.navigate('Get_Help', { associate: responseJson[0] });
-				} else {
-					this.props.navigation.navigate('Management_Landing', { manager: responseJson[0] });
-				}
-			})
-	}
-
+export interface State {}
 class Login extends React.Component<Props, State> {
 
 	constructor() {
