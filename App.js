@@ -1,3 +1,3 @@
-import App from "./app/index";
+import boot from "./app/boot/setup";
 
-export default App;
+export default boot;

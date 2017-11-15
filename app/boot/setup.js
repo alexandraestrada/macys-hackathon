@@ -1,19 +1,11 @@
-import Expo from "expo";
-import React from "react";
+import React, {Component} from "react";
 import { StyleProvider } from "native-base";
 import { Provider } from "react-redux";
 
 import configureStore from "./configstore";
-import App from "../../App";
+import App from "../index";
 
-export interface Props {}
-
-export interface State {
-	store: Object,
-	isLoading: boolean,
-	isReady: boolean,
-}
-class Setup extends React.Component<Props, State> {
+class Setup extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -24,9 +16,6 @@ class Setup extends React.Component<Props, State> {
 	}
 
 	render() {
-		if (!this.state.isReady || this.state.isLoading) {
-			return <Expo.AppLoading />;
-		}
 		return (
 				<Provider store={this.state.store}>
 					<App />

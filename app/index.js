@@ -1,7 +1,7 @@
 import React from "react";
 import { StackNavigator, DrawerNavigator } from "react-navigation";
 import { Root } from "native-base";
-import Login from './screens/Login';
+import Login from './containers/LoginContainer';
 import Home from './screens/Home';
 
 
