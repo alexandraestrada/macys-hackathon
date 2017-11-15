@@ -7,20 +7,22 @@ import {
 } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, List, ListItem, Thumbnail, Left, Right} from 'native-base';
 
-// export interface Props {
-// 	loginForm: any,
-// 	onLogin: Function,
-// }
 
 export interface State {}
 class Get_Help extends React.Component<Props, State> {
+	static navigationOptions = () => ({
+	    headerStyle: {
+	      backgroundColor: '#CC0000',
+	      height: 65
+	    }
+	  });
+
 	render() {
 		const {navigate} = this.props.navigation;
 
 		return (
 			<Container style={styles.container}>
 				<Content>
-					<Header style={styles.header}></Header>
 
 					<Text style={styles.welcome}>What do you need help with?</Text>
 					<View style={{flex:1, flexDirection: 'row', justifyContent: 'center'}}>

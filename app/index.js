@@ -1,5 +1,5 @@
 import React from "react";
-import { StackNavigator, DrawerNavigatorm } from "react-navigation";
+import { StackNavigator, DrawerNavigator } from "react-navigation";
 import { Root } from "native-base";
 import Login from './screens/Login';
 import Home from './screens/Home';

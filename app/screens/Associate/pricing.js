@@ -3,9 +3,11 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  StatusBar
 } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, List, ListItem, Thumbnail, Left, Right, Input, Item} from 'native-base';
+
 
 
 export interface State {}
@@ -29,17 +31,20 @@ class Pricing extends React.Component<Props, State> {
    		this.setState({myText: 'Enter details of your question'})
    	}
 
+	static navigationOptions = () => ({
+	    title: 'Pricing',
+	    headerStyle: {
+	      backgroundColor: '#CC0000',
+	      height: 65
+	    }
+	  });
+
 	render() {
 		const {navigate} = this.props.navigation;
 
 		return (
 			<Container style={styles.container}>
 				<Content>
-					<Header style={styles.header}>
-						<Body>
-							<Text style={styles.headerText} >Pricing</Text>
-						</Body>
-					</Header>
 
 					<View style={{flex:1, flexDirection: 'column', justifyContent: 'center', marginLeft: 10, marginTop: 20}}>
 						<Button style={styles.option} >
@@ -118,6 +123,10 @@ const styles = StyleSheet.create({
   	height: 150,
   	marginLeft: 13,
   	marginTop: 10,
+  	flex: 1,
+  	justifyContent: 'flex-start',
+  	flexDirection: 'row',
+  	alignItems: 'flex-start',
   },
 });
 

@@ -13,15 +13,20 @@ import Tab3 from './resolved_questions';
 
 export interface State {}
 class Ongoing_Questions extends React.Component<Props, State> {
+	static navigationOptions = () => ({
+	    title: 'Ongoing Questions',
+	    headerStyle: {
+	      backgroundColor: '#CC0000',
+	      height: 65
+	    }
+	  });
+
 	render() {
 		const {navigate} = this.props.navigation;
 
 		return (
 			<Container style={styles.container}>
 				<Content>
-			        <Header style={styles.header}>
-			        	<Text style={styles.welcome}>Ongoing Questions</Text>
-			        </Header>
 
                 <List>
                     <ListItem avatar>
@@ -67,7 +72,7 @@ class Ongoing_Questions extends React.Component<Props, State> {
 
 	            <Footer style={styles.footer}>
 	                <FooterTab>
-	                    <Button>
+	                    <Button onPress={() => this.props.navigation.navigate('New_Question', {})}>
 	                    <Image source={require('./../../../images/new_deselected.png')} style={{height: 25, width: 28, marginBottom: 4}}/>
 	                    <Text style={styles.footerText}>New</Text>
 	                    </Button>
@@ -99,6 +104,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
     header: {
+   	backgroundColor: '#CC0000',
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -106,13 +112,13 @@ const styles = StyleSheet.create({
   welcome: {
     fontSize: 23,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
   },
   list:{
     marginTop: -50,
   },
   footer: {
-	marginTop: 300,
+	marginTop: 345,
   },
   footerTextSelected: {
   	color: '#CC0000',

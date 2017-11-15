@@ -10,17 +10,20 @@ import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, Lis
 
 export interface State {}
 class New_Question extends React.Component<Props, State> {
+	static navigationOptions = () => ({
+	    title: 'Price Override',
+	    headerStyle: {
+	      backgroundColor: '#CC0000',
+	      height: 65
+	    }
+	  });
+
 	render() {
 		const {navigate} = this.props.navigation;
 
 		return (
 			<Container style={styles.container}>
 				<Content>
-			        <Header style={styles.header}>
-			        	<Body>
-			        		<Text style={styles.headerText}>Price Override</Text>
-			        	</Body>
-			        </Header>
 
 				<View style={styles.notification}>
 					<Text style={styles.notificationText}>Your request has just been sent to Karen the manager.</Text>
@@ -117,7 +120,7 @@ const styles = StyleSheet.create({
     marginTop: -50,
   },
   footer: {
-	marginTop: 100,
+	marginTop: 140,
   },
   footerTextSelected: {
   	color: '#CC0000',
