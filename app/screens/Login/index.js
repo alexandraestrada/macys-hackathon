@@ -24,7 +24,6 @@ class Login extends React.Component {
 			})
 	}
 
-export interface State {}
 class Login extends React.Component<Props, State> {
 
 	constructor() {
