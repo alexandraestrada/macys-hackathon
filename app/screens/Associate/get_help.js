@@ -13,7 +13,7 @@ class Get_Help extends React.Component<Props, State> {
 	static navigationOptions = () => ({
 	    headerStyle: {
 	      backgroundColor: '#CC0000',
-	      height: 65
+	      height: 65,
 	    }
 	  });
 
