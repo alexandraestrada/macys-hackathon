@@ -6,6 +6,7 @@ import Home from './screens/Home';
 import Get_Help from './screens/Associate/get_help';
 import Ongoing_Questions from './screens/Associate/ongoing_questions';
 import Pricing from './screens/Associate/pricing';
+import New_Question from './screens/Associate/new_question'
 
 
 const App = StackNavigator({
@@ -23,6 +24,9 @@ const App = StackNavigator({
     },
     Ongoing_Questions: { 
         screen: Ongoing_Questions 
+    },
+    New_Question: {
+        screen: New_Question
     }},
     {
         initialRouteName: "Login",
