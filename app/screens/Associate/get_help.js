@@ -24,7 +24,7 @@ class Get_Help extends React.Component<Props, State> {
 
 					<Text style={styles.welcome}>What do you need help with?</Text>
 					<View style={{flex:1, flexDirection: 'row', justifyContent: 'center'}}>
-						<Button style={styles.option} >
+						<Button style={styles.option} onPress={() => this.props.navigation.navigate('Pricing', {})}>
 							<Text style={styles.optionText} >Pricing</Text>
 						</Button>
 						<Button style={styles.option} >

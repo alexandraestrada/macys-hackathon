@@ -28,7 +28,7 @@ class Login extends React.Component<Props, State> {
             	<Text>Forgot password?</Text>
           	</Button>
 				<Button full style={{marginTop: 60, borderRadius: 10, backgroundColor: "#c00"}}
-				onPress={() => this.props.navigation.navigate('Home', {})}>
+				onPress={() => this.props.navigation.navigate('Get_Help', {})}>
 					<Text>Sign In</Text>
 				</Button>
           </Form>

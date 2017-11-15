@@ -22,7 +22,7 @@ class Pricing extends React.Component<Props, State> {
 						</Body>
 					</Header>
 
-					<View style={{flex:1, flexDirection: 'column', justifyContent: 'center', marginTop: 20}}>
+					<View style={{flex:1, flexDirection: 'column', justifyContent: 'center', marginLeft: 10, marginTop: 20}}>
 						<Button style={styles.option} >
 							<Text style={styles.optionText} >I need a manager for price override</Text>
 						</Button>
@@ -31,6 +31,10 @@ class Pricing extends React.Component<Props, State> {
 						</Button>
 						<Button style={styles.option} >
 							<Text style={styles.optionText}>Other</Text>
+						</Button>
+
+						<Button style={styles.send}>
+							<Text style={styles.sendText} >Send to Manager</Text>
 						</Button>
 					</View>
 
@@ -61,6 +65,7 @@ const styles = StyleSheet.create({
   option:{
     backgroundColor: '#F4F6F8',
     height: 100,
+    width: 335,
     margin: 10,
     flex: 1,
     justifyContent: 'center',
@@ -68,6 +73,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   optionText: {
+  	fontSize: 20,
+  },
+  send: {
+  	backgroundColor: '#CC0000',
+  	height: 50,
+    width: 335,
+    margin: 13,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  sendText: {
+  	color: 'white',
   	fontSize: 20,
   }
 });
