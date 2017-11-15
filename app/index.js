@@ -33,7 +33,7 @@ const App = StackNavigator({
         screen: Management_Landing
     }},
     {
-        initialRouteName: "Management_Landing",
+        initialRouteName: "Login",
         headerMode: "float",
     });
 
