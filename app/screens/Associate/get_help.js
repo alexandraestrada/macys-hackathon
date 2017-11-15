@@ -14,6 +14,9 @@ class Get_Help extends React.Component<Props, State> {
 	    headerStyle: {
 	      backgroundColor: '#CC0000',
 	      height: 65,
+	    },
+	    headerTitleStyle: {
+	       color: 'white',
 	    }
 	  });
 
