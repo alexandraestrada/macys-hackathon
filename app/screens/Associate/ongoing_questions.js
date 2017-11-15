@@ -3,7 +3,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Image
 } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, List, ListItem, Thumbnail, Left, Right, Tab, Tabs} from 'native-base';
 import Tab1 from './unread_questions';
@@ -18,14 +19,14 @@ class Ongoing_Questions extends React.Component<Props, State> {
 		return (
 			<Container style={styles.container}>
 				<Content>
-			        <Header style={styles.header}></Header>
-
-				<Text style={styles.welcome}>Ongoing Questions</Text>
+			        <Header style={styles.header}>
+			        	<Text style={styles.welcome}>Ongoing Questions</Text>
+			        </Header>
 
                 <List>
                     <ListItem avatar>
                         <Left>
-                            <Thumbnail source={{ uri: 'http://hr.macys.net/insite/images/logon6_welcome.jpg' }} />
+                            <Image source={require('./../../../images/bill-avatar.png')} style={{height: 30, width: 30, marginLeft: 5}}/>
                         </Left>
                         <Body>
                             <Text>Kumar Pratik</Text>
@@ -38,7 +39,7 @@ class Ongoing_Questions extends React.Component<Props, State> {
             
                     <ListItem avatar>
                         <Left>
-                            <Thumbnail source={{ uri: 'http://hr.macys.net/insite/images/logon6_welcome.jpg' }} />
+                            <Image source={require('./../../../images/jane-avatar.png')} style={{height: 30, width: 30, marginLeft: 5}}/>
                         </Left>
                         <Body>
                             <Text>Sally Su</Text>
@@ -51,7 +52,7 @@ class Ongoing_Questions extends React.Component<Props, State> {
             
                     <ListItem avatar>
                         <Left>
-                            <Thumbnail source={{ uri: 'http://hr.macys.net/insite/images/logon6_welcome.jpg' }} />
+                            <Image source={require('./../../../images/karen-avatar.png')} style={{height: 30, width: 30, marginLeft: 5}}/>
                         </Left>
                         <Body>
                             <Text>Roger Anderson</Text>
@@ -62,6 +63,28 @@ class Ongoing_Questions extends React.Component<Props, State> {
                         </Right>
                     </ListItem>
                 </List>
+
+
+	            <Footer style={styles.footer}>
+	                <FooterTab>
+	                    <Button>
+	                    <Image source={require('./../../../images/new_deselected.png')} style={{height: 25, width: 28, marginBottom: 4}}/>
+	                    <Text style={styles.footerText}>New</Text>
+	                    </Button>
+	                    <Button>
+	                    <Image source={require('./../../../images/envelope_selected.png')} style={{height: 27, width: 23, marginBottom: 4}}/>
+	                    <Text style={styles.footerTextSelected}>Ongoing</Text>
+	                    </Button>
+	                    <Button>
+	                    <Image source={require('./../../../images/search_deselected.png')} style={{height: 26, width: 26, marginBottom: 4}}/>
+	                    <Text style={styles.footerText}>Search</Text>
+	                    </Button>
+	                    <Button>
+	                    <Image source={require('./../../../images/ongoing_deselected.png')} style={{height: 27, width: 23, marginBottom: 4}}/>
+	                    <Text style={styles.footerText}>Account</Text>
+	                    </Button>
+	                </FooterTab>
+	            </Footer>
                 </Content>
 			</Container>
 		);
@@ -76,17 +99,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
     header: {
-  	backgroundColor: '#CC0000',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   welcome: {
-  	marginTop: 20,
-    marginLeft: 70,
-    marginBottom: 20,
-    fontSize: 25,
+    fontSize: 23,
     fontWeight: 'bold',
+    color: 'black',
   },
   list:{
     marginTop: -50,
+  },
+  footer: {
+	marginTop: 300,
+  },
+  footerTextSelected: {
+  	color: '#CC0000',
+  	fontSize: 10,
+  },
+  footerText: {
+  	color: '#B8BCC3',
+  	fontSize: 10,
   },
 });
 

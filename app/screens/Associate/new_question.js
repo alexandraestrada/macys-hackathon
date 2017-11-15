@@ -23,37 +23,49 @@ class New_Question extends React.Component<Props, State> {
 			        </Header>
 
 				<View style={styles.notification}>
-					<Text>Your request has just been sent to Karen the manager.</Text>
+					<Text style={styles.notificationText}>Your request has just been sent to Karen the manager.</Text>
 				</View>
 
                 <List>
                     <ListItem avatar style={styles.listItem} >
                         <Left>
-                            <Thumbnail source={{ uri: 'http://hr.macys.net/insite/images/logon6_welcome.jpg' }} />
                         </Left>
                         <Body>
-                            <Text>Kumar Pratik</Text>
-                            <Text note>Price override - manager needed</Text>
+                            <Text note style={styles.message}>I need a price override</Text>
+                            <Image source={require('./../../../images/bill-avatar.png')} style={{height: 30, width: 30, marginLeft: 5}}/>
+                            <Text style={styles.sender}>Bill the Associate</Text>
                         </Body>
                         <Right>
-                            <Text note>3:43 pm</Text>
+                            <Text note>11:30 am</Text>
                         </Right>
                     </ListItem>
                 </List>
 
+                <View style={{flex: 1, justifyContent: 'center', flexDirection: 'row'}}>
+                	<Image source={require('./../../../images/envelope.png')} style={{height: 95, width: 120, marginTop: 50}}/>
+                </View>
+
+                <View style={{flex: 1, justifyContent: 'center', flexDirection: 'row', marginTop: 20}}>
+                	<Text style={{fontSize: 18, color: '#99A3AC', paddingRight: 50, paddingLeft: 50, textAlign: 'center'}}>Karen hasnt responded to your question yet</Text>
+                </View>
+
 	            <Footer style={styles.footer}>
 	                <FooterTab>
-	                    <Button>
-	                    <Text>Open Issues</Text>
+	                    <Button onPress={() => this.props.navigation.navigate('New', {})}>
+	                    <Image source={require('./../../../images/new_selected.png')} style={{height: 25, width: 28, marginBottom: 4}}/>
+	                    <Text style={styles.footerTextSelected}>New</Text>
+	                    </Button>
+	                    <Button onPress={() => this.props.navigation.navigate('Ongoing_Questions', {})}>
+	                    <Image source={require('./../../../images/ongoing_deselected.png')} style={{height: 27, width: 23, marginBottom: 4}}/>
+	                    <Text style={styles.footerText}>Ongoing</Text>
 	                    </Button>
 	                    <Button>
-	                    <Text>Closed Issues</Text>
-	                    </Button>
-	                    <Button active>
-	                    <Text>Navigate</Text>
+	                    <Image source={require('./../../../images/search_deselected.png')} style={{height: 26, width: 26, marginBottom: 4}}/>
+	                    <Text style={styles.footerText}>Search</Text>
 	                    </Button>
 	                    <Button>
-	                    <Text>Contact</Text>
+	                    <Image source={require('./../../../images/ongoing_deselected.png')} style={{height: 27, width: 23, marginBottom: 4}}/>
+	                    <Text style={styles.footerText}>Account</Text>
 	                    </Button>
 	                </FooterTab>
 	            </Footer>
@@ -66,7 +78,7 @@ class New_Question extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'white',
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -90,6 +102,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 90, 	
   },
+  notificationText: {
+  	padding: 15,
+  	fontSize: 20,
+  },
   welcome: {
   	marginTop: 20,
     marginLeft: 70,
@@ -101,9 +117,26 @@ const styles = StyleSheet.create({
     marginTop: -50,
   },
   footer: {
-  	flex: 1,
-  	flexDirection: "column",
-  	justifyContent: 'flex-end',
+	marginTop: 100,
+  },
+  footerTextSelected: {
+  	color: '#CC0000',
+  	fontSize: 10,
+  },
+  footerText: {
+  	color: '#B8BCC3',
+  	fontSize: 10,
+  },
+  message: {
+  	fontSize: 20,
+  	marginBottom: 10,
+  },
+  sender: {
+  	fontSize: 15,
+  	marginTop: -25,
+  	marginLeft: 60,
+  	marginBottom: 10,
+  	color: '#637381',
   }
 });
 
