@@ -24,7 +24,6 @@ class Login extends React.Component {
 			})
 	}
 
-<<<<<<< HEAD
 export interface State {}
 class Login extends React.Component<Props, State> {
 
@@ -48,8 +47,6 @@ class Login extends React.Component<Props, State> {
 			})
 	}
 
-=======
->>>>>>> managment-sockets
 	render() {
 		const {navigate} = this.props.navigation;
 
