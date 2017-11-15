@@ -40,14 +40,14 @@ class New_Question extends React.Component<Props, State> {
                 {
                   this.state && this.state.messages.map((message, i) => {
                     return (
-                      <ListItem avatar style={styles.listItem} >
+                      <ListItem avatar style={styles.listItem} key={'list-item-key-' + i}>
                         <Left>
                           <Thumbnail large source={{ uri: 'http://www.sunburstshutterscharlotte.com/img/Neil%20NC%20Headshot--18.jpg?t=1506633857' }}
                           />
                         </Left>
                         <Body>
-                            <Text>{message.sender.name.first} {message.sender.name.last}</Text>
-                            <Text note>{this.state.category} - {message.text}</Text>
+                            <Text>{message.sender.name.first}, {message.sender.title}</Text>
+                            <Text note>{message.text}</Text>
                         </Body>
                         <Right>
                             <Text note>3:43 pm</Text>
