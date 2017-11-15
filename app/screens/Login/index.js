@@ -2,13 +2,7 @@ import * as React from "react";
 import { Image, Platform } from "react-native";
 import { Container, Content, Header, Item, Body, Title, Button, Text, View, Icon, Footer, Form, Input } from "native-base";
 
-export interface Props {
-	loginForm: any,
-	onLogin: Function,
-}
-
-export interface State {}
-class Login extends React.Component<Props, State> {
+class Login extends React.Component {
 
 	constructor() {
     super()
@@ -25,7 +19,7 @@ class Login extends React.Component<Props, State> {
 				if (responseJson[0].accountType === 'Associate') {
 					this.props.navigation.navigate('Get_Help', { associate: responseJson[0] });
 				} else {
-					// this.props.navigation.navigate('Get_Help', {})
+					this.props.navigation.navigate('Management_Landing', { manager: responseJson[0] });
 				}
 			})
 	}
