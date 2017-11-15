@@ -8,9 +8,7 @@ import {
 } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, List, ListItem, Thumbnail, Left, Right, Input, Item} from 'native-base';
 
-
-export interface State {}
-class New_Question extends React.Component<Props, State> {
+class New_Question extends React.Component {
 
   componentDidMount() {
     const questionId = this.props.navigation.state.params.question._id;
@@ -41,15 +39,14 @@ class New_Question extends React.Component<Props, State> {
                 {
                   this.state && this.state.messages.map((message, i) => {
                     return (
-                      <ListItem avatar style={styles.listItem} key={'list-item-key-' + i}>
-
+                      <ListItem avatar style={styles.listItem} >
                         <Left>
                           <Thumbnail large source={{ uri: 'http://www.sunburstshutterscharlotte.com/img/Neil%20NC%20Headshot--18.jpg?t=1506633857' }}
                           />
                         </Left>
                         <Body>
-                            <Text>{message.sender.name.first}, {message.sender.title}</Text>
-                            <Text note>{message.text}</Text>
+                            <Text>{message.sender.name.first} {message.sender.name.last}</Text>
+                            <Text note>{this.state.category} - {message.text}</Text>
                         </Body>
                         <Right>
                             <Text note>3:43 pm</Text>
@@ -59,6 +56,7 @@ class New_Question extends React.Component<Props, State> {
                   })
                 }
                 </List>
+
 	            <Footer style={styles.footer}>
 	                <FooterTab>
 	                    <Button>
