@@ -1,11 +1,19 @@
 import * as React from "react";
 import { Image, Platform } from "react-native";
+import { NavigationActions } from 'react-navigation';
 import { Container, Content, Header, Item, Body, Title, Button, Text, View, Icon, Footer, Form, Input } from "native-base";
 
 export interface Props {
 	loginForm: any,
 	onLogin: Function,
 }
+
+const resetAction = NavigationActions.reset({
+  index: 0,
+  actions: [
+    NavigationActions.navigate({ routeName: 'Home'})
+  ]
+});
 
 export interface State {}
 class Login extends React.Component<Props, State> {
@@ -26,7 +34,7 @@ class Login extends React.Component<Props, State> {
             	<Text>Forgot password?</Text>
           	</Button>
 				<Button full style={{marginTop: 60, borderRadius: 10, backgroundColor: "#c00"}}
-				onPress={() => this.props.navigation.navigate('Home', {})}>
+				onPress={() => this.props.navigation.dispatch(resetAction)}>
 					<Text>Sign In</Text>
 				</Button>
           </Form>
