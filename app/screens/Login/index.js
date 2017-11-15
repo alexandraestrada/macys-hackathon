@@ -9,6 +9,27 @@ export interface Props {
 
 export interface State {}
 class Login extends React.Component<Props, State> {
+
+	constructor() {
+    super()
+    this.state = {
+       text: ''
+    }
+    this.loginUser = this.loginUser.bind(this);
+ 	}
+
+	loginUser() {
+		return fetch('https://young-brook-73094.herokuapp.com/api/users/' + this.state.text)
+			.then((response) => response.json())
+			.then(responseJson => {
+				if (responseJson[0].accountType === 'Associate') {
+					this.props.navigation.navigate('Get_Help', { associate: responseJson[0] });
+				} else {
+					// this.props.navigation.navigate('Get_Help', {})
+				}
+			})
+	}
+
 	render() {
 		const {navigate} = this.props.navigation;
 
@@ -19,16 +40,23 @@ class Login extends React.Component<Props, State> {
 					<Container >
 					<Form >
             <Item>
-              <Input placeholder="User ID" />
-			</Item>
+              <Input
+              	onChangeText={text => this.setState({ text: text.toLowerCase() })}
+              	value={this.state.text}
+	              placeholder="Associate ID" 
+              />
+						</Item>
             <Item>
               <Input placeholder="Password" secureTextEntry={true} />
 			</Item>
 			<Button transparent dark >
             	<Text>Forgot password?</Text>
           	</Button>
-				<Button full style={{marginTop: 60, borderRadius: 10, backgroundColor: "#c00"}}
-				onPress={() => this.props.navigation.navigate('Get_Help', {})}>
+				<Button 
+					full 
+					style={{marginTop: 60, borderRadius: 10, backgroundColor: "#c00"}}
+					onPress={this.loginUser}
+				>
 					<Text>Sign In</Text>
 				</Button>
           </Form>

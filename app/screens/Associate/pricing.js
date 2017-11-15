@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SocketIOClient from 'socket.io-client';
 import {
   Platform,
   StyleSheet,
@@ -10,15 +11,19 @@ import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, Lis
 
 export interface State {}
 class Pricing extends React.Component<Props, State> {
+
 	constructor() {
       super()
       this.state = {
          myText: 'Enter details of your question'
       }
+      this.socket = SocketIOClient('https://young-brook-73094.herokuapp.com');
+      this.socket.on('questionSubmitted', ({ question }) => 
+        this.props.navigation.navigate('New_Question', { question }));
    	}
 
     updateTextNeedManager = () => {
-      this.setState({myText: 'I need a price override'})
+      this.setState({ myText: 'I need a price override' })
    	}
 
    	updateTextCouponExemption = () => {
@@ -29,8 +34,30 @@ class Pricing extends React.Component<Props, State> {
    		this.setState({myText: 'Enter details of your question'})
    	}
 
+    submitQuestion = () => {
+      const associateId = this.props.navigation.state.params.associate._id
+      const { category } = this.props.navigation.state.params.category;
+
+      this.socket.emit('newQuestion', { 
+        message: { 
+          sender: associateId, 
+          recipient: '5a0bc7d431955b7fc51baeea', 
+          text: this.state.myText, 
+        },
+        question: {
+          text: this.state.myText,
+          assigner: associateId,
+          assignee: '5a0bc7d431955b7fc51baeea',
+          category: category,
+          status: 'open',
+        }
+      });
+
+    }
+
 	render() {
 		const {navigate} = this.props.navigation;
+    console.log(this.props)
 
 		return (
 			<Container style={styles.container}>
@@ -56,7 +83,7 @@ class Pricing extends React.Component<Props, State> {
 							<Input placeholder={this.state.myText} />
 						</Item>
 
-						<Button style={styles.send} onPress={() => this.props.navigation.navigate('New_Question', {})}>
+						<Button style={styles.send} onPress={this.submitQuestion}>
 							<Text style={styles.sendText}>Send to Manager</Text>
 						</Button>
 					</View>

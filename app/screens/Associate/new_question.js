@@ -8,10 +8,19 @@ import {
 } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, List, ListItem, Thumbnail, Left, Right, Input, Item} from 'native-base';
 
-export interface State {}
-class New_Question extends React.Component<Props, State> {
+class New_Question extends React.Component {
+
+  componentDidMount() {
+    const questionId = this.props.navigation.state.params.question._id;
+
+    fetch('https://young-brook-73094.herokuapp.com/api/questions/' + questionId)
+      .then(response => response.json())
+      .then(responseJson => this.setState({ ...responseJson }));
+  }
+
 	render() {
 		const {navigate} = this.props.navigation;
+    console.log(this.state);
 
 		return (
 			<Container style={styles.container}>
@@ -27,18 +36,25 @@ class New_Question extends React.Component<Props, State> {
 				</View>
 
                 <List>
-                    <ListItem avatar style={styles.listItem} >
+                {
+                  this.state && this.state.messages.map((message, i) => {
+                    return (
+                      <ListItem avatar style={styles.listItem} >
                         <Left>
-                            <Thumbnail source={{ uri: 'http://hr.macys.net/insite/images/logon6_welcome.jpg' }} />
+                          <Thumbnail large source={{ uri: 'http://www.sunburstshutterscharlotte.com/img/Neil%20NC%20Headshot--18.jpg?t=1506633857' }}
+                          />
                         </Left>
                         <Body>
-                            <Text>Kumar Pratik</Text>
-                            <Text note>Price override - manager needed</Text>
+                            <Text>{message.sender.name.first} {message.sender.name.last}</Text>
+                            <Text note>{this.state.category} - {message.text}</Text>
                         </Body>
                         <Right>
                             <Text note>3:43 pm</Text>
                         </Right>
                     </ListItem>
+                    )
+                  })
+                }
                 </List>
 
 	            <Footer style={styles.footer}>
@@ -59,6 +75,7 @@ class New_Question extends React.Component<Props, State> {
 	            </Footer>
 
                 </Content>
+				<Image source={require('./../../../images/envelope_image.svg')} style={{height: 500}}/>
 			</Container>
 		);
 	}
