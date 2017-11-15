@@ -21,9 +21,6 @@ class New_Question extends React.Component<Props, State> {
     },
     headerBackTitleStyle: {
 		color: 'white',
-	},
-	headerTintColor: {
-		tintColor: '#FFF',
 	}
   });
 
