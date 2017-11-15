@@ -25,6 +25,10 @@ class Pricing extends React.Component<Props, State> {
    		this.setState({myText: 'I need to apply a coupon exemption'})
    	}
 
+   	updateTextOther = () => {
+   		this.setState({myText: 'Enter details of your question'})
+   	}
+
 	render() {
 		const {navigate} = this.props.navigation;
 
@@ -44,7 +48,7 @@ class Pricing extends React.Component<Props, State> {
 						<Button style={styles.option} >
 							<Text style={styles.optionText} onPress = {this.updateTextCouponExemption}>I need to apply a coupon exemption</Text>
 						</Button>
-						<Button style={styles.option} >
+						<Button style={styles.option} onPress = {this.updateTextOther}>
 							<Text style={styles.optionText}>Other</Text>
 						</Button>
 
