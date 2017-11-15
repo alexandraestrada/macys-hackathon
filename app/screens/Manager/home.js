@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SocketIOClient from 'socket.io-client';
 import {
   Platform,
   StyleSheet,
@@ -10,8 +11,31 @@ import Tab1 from './unread_questions';
 import Tab2 from './read_questions';
 import Tab3 from './resolved_questions';
 
-export interface State {}
-class Manager_Landing extends React.Component<Props, State> {
+class Manager_Landing extends React.Component {
+    constructor() {
+        super();
+        this.socket = SocketIOClient('https://young-brook-73094.herokuapp.com');
+        console.log('socket', this.socket)
+        console.log('this.state', this.state);
+    }
+
+    componentDidMount() {
+        const userId = this.props.navigation.state.params.manager._id;
+        fetch('https://young-brook-73094.herokuapp.com/api/users/' + userId + '/questions')
+            .then(response => response.json())
+            .then(responseJson => this.setState({ questions: responseJson}));
+
+        this.socket.on('questionSubmitted', ({ question }) => {
+            console.log('question here?', question);
+            this.setState(prevState => { 
+                const newState = [question].concat(prevState.questions);
+                console.log('newstate', newState)
+                return {questions: newState};
+            })
+            console.log('state', this.state);
+        })
+    }
+
 	render() {
 		const {navigate} = this.props.navigation;
 
@@ -21,44 +45,23 @@ class Manager_Landing extends React.Component<Props, State> {
 				  <Text style={styles.welcome}>Ongoing Questions</Text>
 
           <List>
-              <ListItem avatar>
-                  <Left>
-                      <Thumbnail source={{ uri: 'http://hr.macys.net/insite/images/logon6_welcome.jpg' }} />
-                  </Left>
-                  <Body>
-                      <Text>Kumar Pratik</Text>
-                      <Text note>Price override - manager needed</Text>
-                  </Body>
-                  <Right>
-                      <Text note>3:43 pm</Text>
-                  </Right>
-              </ListItem>
-      
-              <ListItem avatar>
-                  <Left>
-                      <Thumbnail source={{ uri: 'http://hr.macys.net/insite/images/logon6_welcome.jpg' }} />
-                  </Left>
-                  <Body>
-                      <Text>Sally Su</Text>
-                      <Text note>I have a tricky return</Text>
-                  </Body>
-                  <Right>
-                      <Text note>3:50 pm</Text>
-                  </Right>
-              </ListItem>
-      
-              <ListItem avatar>
-                  <Left>
-                      <Thumbnail source={{ uri: 'http://hr.macys.net/insite/images/logon6_welcome.jpg' }} />
-                  </Left>
-                  <Body>
-                      <Text>Roger Anderson</Text>
-                      <Text note>Coupon Exemption - need advice from Manager</Text>
-                  </Body>
-                  <Right>
-                      <Text note>4:30 pm</Text>
-                  </Right>
-              </ListItem>
+            {  this.state && this.state.questions.map((question, i) => {
+                return (
+                    <ListItem avatar key={'list-item-' + i}>
+                        <Left>
+                            <Thumbnail source={{ uri: 'http://hr.macys.net/insite/images/logon6_welcome.jpg' }} />
+                        </Left>
+                        <Body>
+                            <Text>{question.assigner.name.first} {question.assigner.name.last}</Text>
+                            <Text note>{question.text}</Text>
+                        </Body>
+                        <Right>
+                            <Text note>3:43 pm</Text>
+                        </Right>
+                    </ListItem>
+                )
+                })
+            }
             </List>
           </Content>
 			</Container>

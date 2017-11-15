@@ -19,6 +19,8 @@ class Get_Help extends React.Component<Props, State> {
 
 	render() {
 		const {navigate} = this.props.navigation;
+    const associate = this.props.navigation.state.params.associate;
+    const category = { category: 'pricing' };
 
 		return (
 			<Container style={styles.container}>
@@ -26,7 +28,7 @@ class Get_Help extends React.Component<Props, State> {
 
 					<Text style={styles.welcome}>What do you need help with?</Text>
 					<View style={{flex:1, flexDirection: 'row', justifyContent: 'center'}}>
-						<Button style={styles.option} onPress={() => this.props.navigation.navigate('Pricing', {})}>
+						<Button style={styles.option} onPress={() => this.props.navigation.navigate('Pricing', { associate, category })}>
 							<Text style={styles.optionText} >Pricing</Text>
 						</Button>
 						<Button style={styles.option} >

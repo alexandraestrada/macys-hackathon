@@ -11,37 +11,52 @@ import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, Lis
 export interface State {}
 class New_Question extends React.Component<Props, State> {
 	static navigationOptions = () => ({
-	    title: 'Price Override',
-	    headerStyle: {
-	      backgroundColor: '#CC0000',
-	      height: 65
-	    }
-	  });
+    title: 'Price Override',
+    headerStyle: {
+      backgroundColor: '#CC0000',
+      height: 65
+    }
+  });
 
-	render() {
-		const {navigate} = this.props.navigation;
+  componentDidMount() {
+    const questionId = this.props.navigation.state.params.question._id;
 
-		return (
-			<Container style={styles.container}>
-				<Content>
+    fetch('https://young-brook-73094.herokuapp.com/api/questions/' + questionId)
+      .then(response => response.json())
+      .then(responseJson => this.setState({ ...responseJson }));
+  }
 
-				<View style={styles.notification}>
-					<Text style={styles.notificationText}>Your request has just been sent to Karen the manager.</Text>
-				</View>
+  render() {
+    const {navigate} = this.props.navigation;
+    console.log(this.state);
+
+    return (
+      <Container style={styles.container}>
+        <Content>
+
+        <View style={styles.notification}>
+          <Text style={styles.notificationText}>Your request has just been sent to Karen the manager.</Text>
+        </View>
 
                 <List>
-                    <ListItem avatar style={styles.listItem} >
+                {
+                  this.state && this.state.messages.map((message, i) => {
+                    return (
+                      <ListItem avatar style={styles.listItem} key={'list-item-key-' + i}>
                         <Left>
                         </Left>
                         <Body>
-                            <Text note style={styles.message}>I need a price override</Text>
-                            <Image source={require('./../../../images/bill-avatar.png')} style={{height: 30, width: 30, marginLeft: 5}}/>
-                            <Text style={styles.sender}>Bill the Associate</Text>
+                        	<Text note style={styles.message}>{message.text}</Text>
+                        		<Image source={require('./../../../images/bill-avatar.png')} style={{height: 40, width: 40}}/>
+                            <Text style={styles.sender}>{message.sender.name.first}, {message.sender.title}</Text>
                         </Body>
                         <Right>
-                            <Text note>11:30 am</Text>
+                            <Text note style={styles.timestamp}>11:30 am</Text>
                         </Right>
                     </ListItem>
+                    )
+                  })
+                }
                 </List>
 
                 <View style={{flex: 1, justifyContent: 'center', flexDirection: 'row'}}>
@@ -87,30 +102,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   header: {
-  	backgroundColor: '#CC0000',
-  	flex: 1,
-  	alignItems: 'center',
+    backgroundColor: '#CC0000',
+    flex: 1,
+    alignItems: 'center',
   },
   headerText: {
-  	color: 'white',
-  	fontSize: 20,
-  	fontWeight: 'bold',
-  	marginTop: -10,
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: -10,
   },
   notification: {
-  	backgroundColor: '#FCF0CD',
+    backgroundColor: '#FCF0CD',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    height: 90, 	
+    height: 90,   
   },
   notificationText: {
   	padding: 15,
   	fontSize: 20,
   },
   welcome: {
-  	marginTop: 20,
+    marginTop: 20,
     marginLeft: 70,
     marginBottom: 20,
     fontSize: 25,
@@ -120,7 +135,7 @@ const styles = StyleSheet.create({
     marginTop: -50,
   },
   footer: {
-	marginTop: 140,
+	marginTop: 130,
   },
   footerTextSelected: {
   	color: '#CC0000',
@@ -140,6 +155,9 @@ const styles = StyleSheet.create({
   	marginLeft: 60,
   	marginBottom: 10,
   	color: '#637381',
+  },
+  timestamp: {
+  	marginTop: 8,
   }
 });
 
