@@ -8,6 +8,7 @@ import Ongoing_Questions from './screens/Associate/ongoing_questions';
 import Pricing from './screens/Associate/pricing';
 import New_Question from './screens/Associate/new_question'
 import Management_Landing from './screens/Manager/home';
+import Manager_Question from './screens/Manager/manager_question';
 
 
 const App = StackNavigator({
@@ -22,6 +23,9 @@ const App = StackNavigator({
     },
     Pricing: { 
         screen: Pricing
+    },
+    Manager_Question: {
+        screen: Manager_Question
     },
     Ongoing_Questions: { 
         screen: Ongoing_Questions 

@@ -17,9 +17,11 @@ class Manager_Landing extends React.Component {
         this.socket = SocketIOClient('https://young-brook-73094.herokuapp.com');
         console.log('socket', this.socket)
         console.log('this.state', this.state);
+  
     }
 
     componentDidMount() {
+
         const userId = this.props.navigation.state.params.manager._id;
         fetch('https://young-brook-73094.herokuapp.com/api/users/' + userId + '/questions')
             .then(response => response.json())
@@ -35,6 +37,11 @@ class Manager_Landing extends React.Component {
             console.log('state', this.state);
         })
     }
+    goToQuestion = (question) => {
+      return this.props.navigation.navigate('Manager_Question', {questionId: question._id});
+
+    }
+    
 
 	render() {
 		const {navigate} = this.props.navigation;
@@ -47,7 +54,7 @@ class Manager_Landing extends React.Component {
           <List>
             {  this.state && this.state.questions.map((question, i) => {
                 return (
-                    <ListItem avatar key={'list-item-' + i}>
+                    <ListItem avatar key={'list-item-' + i} onPress={() => this.goToQuestion(question)}>
                         <Left>
                             <Thumbnail source={{ uri: 'http://hr.macys.net/insite/images/logon6_welcome.jpg' }} />
                         </Left>
