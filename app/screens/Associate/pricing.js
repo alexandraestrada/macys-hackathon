@@ -56,8 +56,8 @@ class Pricing extends React.Component<Props, State> {
 							<Input placeholder={this.state.myText} />
 						</Item>
 
-						<Button style={styles.send}>
-							<Text style={styles.sendText} >Send to Manager</Text>
+						<Button style={styles.send} onPress={() => this.props.navigation.navigate('New_Question', {})}>
+							<Text style={styles.sendText}>Send to Manager</Text>
 						</Button>
 					</View>
 
@@ -79,6 +79,8 @@ const styles = StyleSheet.create({
   headerText: {
   	fontSize: 20,
   	fontWeight: 'bold',
+  	color: 'white',
+  	marginTop: -10,
   },
   welcome: {
     margin: 45,
