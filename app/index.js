@@ -38,8 +38,13 @@ const App = StackNavigator({
     });
 
 
-export default () => ( 
-    <Root >
-        <App />
-    </Root>
-);
+export default class extends React.Component {
+
+    render() {
+        return (
+            <Root >
+                <App socketConnection={this.socket}/>
+            </Root>
+        )
+    } 
+};
