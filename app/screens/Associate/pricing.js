@@ -57,14 +57,14 @@ class Pricing extends React.Component<Props, State> {
         message: { 
           sender: associateId, 
           recipient: '5a0bc7d431955b7fc51baeea', 
-          text: this.state.myText, 
+          text: this.state.myText
         },
         question: {
           text: this.state.myText,
           assigner: associateId,
           assignee: '5a0bc7d431955b7fc51baeea',
           category: category,
-          status: 'open',
+          status: 'open'
         }
       });
 

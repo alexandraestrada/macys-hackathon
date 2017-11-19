@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import SocketIOClient from 'socket.io-client';
+
 import {
   Platform,
   StyleSheet,
@@ -11,13 +13,31 @@ import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, Lis
 
 export interface State {}
 class Manager_Question extends React.Component<Props, State> {
-
+constructor() {
+      super()
+      this.socket = SocketIOClient('https://young-brook-73094.herokuapp.com');
+      
+  }
   componentDidMount() {
     const questionId = this.props.navigation.state.params.questionId;
 
     fetch('https://young-brook-73094.herokuapp.com/api/questions/' + questionId)
       .then(response => response.json())
       .then(responseJson => this.setState({ ...responseJson }));
+  }
+
+  submitQuestion = () => {
+      alert('this gets hit')
+      console.log('state', this.state);
+      this.socket.emit('newMessage', { 
+        questionId: this.state._id,
+        message: { 
+          sender: this.state.assignee._id, 
+          recipient: this.state.assigner._id, 
+          text: "on my way"
+        }
+      });
+
   }
 
   render() {
@@ -56,7 +76,7 @@ class Manager_Question extends React.Component<Props, State> {
                 }
                 </List>
                 <Input placeholder="On My Way" />
-                <Button>
+                <Button onPress={this.submitQuestion}>
                       <Text>Respond</Text>
                 </Button>
               <Footer style={styles.footer}>
