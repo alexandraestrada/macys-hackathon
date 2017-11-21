@@ -3,9 +3,10 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Image
 } from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, List, ListItem, Thumbnail, Left, Right} from 'native-base';
+import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, List, ListItem, Thumbnail, Left, Right, Icon} from 'native-base';
 
 
 export interface State {}
@@ -17,7 +18,8 @@ class Get_Help extends React.Component<Props, State> {
 	    },
 	    headerTitleStyle: {
 	       color: 'white',
-	    }
+	    },
+
 	  });
 
 	render() {
@@ -27,6 +29,7 @@ class Get_Help extends React.Component<Props, State> {
 
 		return (
 			<Container style={styles.container}>
+				
 				<Content>
 
 					<Text style={styles.welcome}>What do you need help with?</Text>
@@ -48,6 +51,26 @@ class Get_Help extends React.Component<Props, State> {
 						</Button>
 					</View>
                 </Content>
+                <Footer style={styles.footer}>
+	                <FooterTab>
+	                    <Button onPress={() => this.props.navigation.navigate('New', {})}>
+	                    <Image source={require('./../../../images/new_selected.png')} style={{height: 25, width: 28, marginBottom: 4}}/>
+	                    <Text style={styles.footerTextSelected}>New</Text>
+	                    </Button>
+	                    <Button onPress={() => this.props.navigation.navigate('Ongoing_Questions', {})}>
+	                    <Image source={require('./../../../images/ongoing_deselected.png')} style={{height: 27, width: 23, marginBottom: 4}}/>
+	                    <Text style={styles.footerText}>Ongoing</Text>
+	                    </Button>
+	                    <Button>
+	                    <Image source={require('./../../../images/search_deselected.png')} style={{height: 26, width: 26, marginBottom: 4}}/>
+	                    <Text style={styles.footerText}>Search</Text>
+	                    </Button>
+	                    <Button>
+	                    <Image source={require('./../../../images/ongoing_deselected.png')} style={{height: 27, width: 23, marginBottom: 4}}/>
+	                    <Text style={styles.footerText}>Account</Text>
+	                    </Button>
+	                </FooterTab>
+	            </Footer>
 			</Container>
 		);
 	}
@@ -64,8 +87,10 @@ const styles = StyleSheet.create({
   },
   welcome: {
     margin: 45,
-    fontSize: 20,
+    fontSize: 21,
     fontWeight: 'bold',
+    
+
   },
   option:{
     backgroundColor: '#F4F6F8',
@@ -75,9 +100,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
+    shadowOffset:{  width: 1,  height: 1,  },
+	shadowColor: 'grey',
+	shadowOpacity: 0.5,
   },
   optionText: {
-  	fontSize: 20,
+  	fontSize: 21,
+  	textAlign: "center",
+  },
+  footer: {
+	marginTop: 50,
+  },
+  footerTextSelected: {
+  	color: '#CC0000',
+  	fontSize: 10,
+  },
+  footerText: {
+  	color: '#B8BCC3',
+  	fontSize: 10,
   }
 });
 

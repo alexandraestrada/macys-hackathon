@@ -17,7 +17,7 @@ class Pricing extends React.Component<Props, State> {
 	constructor() {
       super()
       this.state = {
-         myText: 'Enter details of your question'
+         myText: 'Enter details of your question...'
       }
       this.socket = SocketIOClient('https://young-brook-73094.herokuapp.com');
       this.socket.on('questionSubmitted', ({ question }) => 
@@ -133,9 +133,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
+    shadowOffset:{  width: 1,  height: 1,  },
+  shadowColor: 'grey',
+  shadowOpacity: 0.3,
   },
   optionText: {
   	fontSize: 20,
+
   },
   send: {
   	backgroundColor: '#CC0000',
@@ -159,6 +163,8 @@ const styles = StyleSheet.create({
   	justifyContent: 'flex-start',
   	flexDirection: 'row',
   	alignItems: 'flex-start',
+    borderRadius: 5,
+
   },
 });
 

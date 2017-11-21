@@ -6,19 +6,29 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
 } from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Button, Body, Title, List, ListItem, Thumbnail, Left, Right, Input, Item} from 'native-base';
+import { Container, Header, Content, Footer, FooterTab, Body, Title, List, ListItem, Thumbnail, Left, Right, Input, Item} from 'native-base';
 
+import { Button } from '../../components/Button';
 
 export interface State {}
 class Manager_Question extends React.Component<Props, State> {
-constructor() {
+  constructor() {
       super()
+
+      this.state = { 
+        inputText: '',
+        messages: [],
+      };
       this.socket = SocketIOClient('https://young-brook-73094.herokuapp.com');
-      
   }
+
   componentDidMount() {
+    this.socket.on('questionUpdated', ({ question }) => {
+      this.setState({ messages: question.messages })
+    });
+
     const questionId = this.props.navigation.state.params.questionId;
 
     fetch('https://young-brook-73094.herokuapp.com/api/questions/' + questionId)
@@ -27,22 +37,19 @@ constructor() {
   }
 
   submitQuestion = () => {
-      alert('this gets hit')
-      console.log('state', this.state);
       this.socket.emit('newMessage', { 
         questionId: this.state._id,
         message: { 
           sender: this.state.assignee._id, 
           recipient: this.state.assigner._id, 
-          text: "on my way"
+          text: this.state.inputText
         }
       });
-
+      this.setState({ inputText: '' })
   }
 
   render() {
     const {navigate} = this.props.navigation;
-    console.log(this.state);
 
     return (
       <Container style={styles.container}>
@@ -63,10 +70,10 @@ constructor() {
                           <Thumbnail large source={{ uri: 'http://www.sunburstshutterscharlotte.com/img/Neil%20NC%20Headshot--18.jpg?t=1506633857' }}
                           />
                         </Left>
-                        <Body>
+                        <View style={styles.mediaObject}>
                             <Text>{message.sender.name.first}, {message.sender.title}</Text>
                             <Text note>{message.text}</Text>
-                        </Body>
+                        </View>
                         <Right>
                             <Text note>3:43 pm</Text>
                         </Right>
@@ -75,26 +82,21 @@ constructor() {
                   })
                 }
                 </List>
-                <Input placeholder="On My Way" />
+                <View style={styles.suggestionContainer}>
+                  <Button>Need more info</Button>
+                  <Button>On my way</Button>
+                  <Button>Be there in 5</Button>
+                </View>
+                <Input
+                  onChangeText={ text => this.setState({ inputText: text }) }
+                  placeholder="Enter your response"
+                  value={ this.state.inputText }
+                  style={styles.input}
+                />
                 <Button onPress={this.submitQuestion}>
                       <Text>Respond</Text>
                 </Button>
-              <Footer style={styles.footer}>
-                  <FooterTab>
-                      <Button>
-                      <Text>Open Issues</Text>
-                      </Button>
-                      <Button>
-                      <Text>Closed Issues</Text>
-                      </Button>
-                      <Button active>
-                      <Text>Navigate</Text>
-                      </Button>
-                      <Button>
-                      <Text>Contact</Text>
-                      </Button>
-                  </FooterTab>
-              </Footer>
+
 
                 </Content>
       </Container>
@@ -104,7 +106,7 @@ constructor() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFFFF',
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -120,14 +122,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: -10,
   },
-  notification: {
-    backgroundColor: '#FCF0CD',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    height: 90,   
-  },
   welcome: {
     marginTop: 20,
     marginLeft: 70,
@@ -138,10 +132,25 @@ const styles = StyleSheet.create({
   list:{
     marginTop: -50,
   },
+  listItem: {
+    width: 100,
+  },
+  suggestionContainer: {
+    backgroundColor: '#FFFFFF',
+    flex: 1,
+    flexWrap: 'nowrap',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: "row",
+  },
   footer: {
     flex: 1,
     flexDirection: "column",
     justifyContent: 'flex-end',
+  },
+  mediaObject: {
+    flex: 1,
+    flexDirection: "row",
   }
 });
 

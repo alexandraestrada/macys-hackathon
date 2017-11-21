@@ -74,25 +74,25 @@ class Ongoing_Questions extends React.Component<Props, State> {
 
 
 	            <Footer style={styles.footer}>
-	                <FooterTab>
-	                    <Button onPress={() => this.props.navigation.navigate('New_Question', {})}>
-	                    <Image source={require('./../../../images/new_deselected.png')} style={{height: 25, width: 28, marginBottom: 4}}/>
-	                    <Text style={styles.footerText}>New</Text>
-	                    </Button>
-	                    <Button>
-	                    <Image source={require('./../../../images/envelope_selected.png')} style={{height: 27, width: 23, marginBottom: 4}}/>
-	                    <Text style={styles.footerTextSelected}>Ongoing</Text>
-	                    </Button>
-	                    <Button>
-	                    <Image source={require('./../../../images/search_deselected.png')} style={{height: 26, width: 26, marginBottom: 4}}/>
-	                    <Text style={styles.footerText}>Search</Text>
-	                    </Button>
-	                    <Button>
-	                    <Image source={require('./../../../images/ongoing_deselected.png')} style={{height: 27, width: 23, marginBottom: 4}}/>
-	                    <Text style={styles.footerText}>Account</Text>
-	                    </Button>
-	                </FooterTab>
-	            </Footer>
+                  <FooterTab>
+                      <Button onPress={() => this.props.navigation.navigate('New', {})}>
+                      <Image source={require('./../../../images/new_selected.png')} style={{height: 25, width: 28, marginBottom: 4}}/>
+                      <Text style={styles.footerTextSelected}>New</Text>
+                      </Button>
+                      <Button onPress={() => this.props.navigation.navigate('Ongoing_Questions', {})}>
+                      <Image source={require('./../../../images/ongoing_deselected.png')} style={{height: 27, width: 23, marginBottom: 4}}/>
+                      <Text style={styles.footerText}>Ongoing</Text>
+                      </Button>
+                      <Button>
+                      <Image source={require('./../../../images/search_deselected.png')} style={{height: 26, width: 26, marginBottom: 4}}/>
+                      <Text style={styles.footerText}>Search</Text>
+                      </Button>
+                      <Button>
+                      <Image source={require('./../../../images/ongoing_deselected.png')} style={{height: 27, width: 23, marginBottom: 4}}/>
+                      <Text style={styles.footerText}>Account</Text>
+                      </Button>
+                  </FooterTab>
+              </Footer>
                 </Content>
 			</Container>
 		);

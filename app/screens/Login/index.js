@@ -5,14 +5,13 @@ import { Container, Content, Header, Item, Body, Title, Button, Text, View, Icon
 class Login extends React.Component {
 
 	constructor() {
-    super()
-    this.state = {
-       text: ''
-    }
-    this.loginUser = this.loginUser.bind(this);
+	    super()
+	    this.state = {
+	       text: ''
+	    }
  	}
 
-	loginUser() {
+	loginUser = () => {
 		return fetch('https://young-brook-73094.herokuapp.com/api/users/' + this.state.text)
 			.then((response) => response.json())
 			.then(responseJson => {
@@ -25,7 +24,7 @@ class Login extends React.Component {
 	}
 
 	render() {
-		const {navigate} = this.props.navigation;
+		const { navigate } = this.props.navigation;
 
 		return (
 			<Container style={{backgroundColor: "#fff"}}>
