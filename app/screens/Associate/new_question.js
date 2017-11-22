@@ -54,7 +54,10 @@ class New_Question extends React.Component<Props, State> {
                         </Left>
                         <Body>
                         	<Text note style={styles.message}>{message.text}</Text>
-                        		<Image source={require('./../../../images/bill-avatar.png')} style={{height: 40, width: 40}}/>
+                        		<Image 
+                              source={{uri: 'https://pbs.twimg.com/profile_images/915395771733700608/24T9sOOy_400x400.jpg'}} 
+                              style={{height: 40, width: 40, borderRadius: 40/2, borderWidth: 1, borderColor: '#FFFFFF'}}
+                            />
                             <Text style={styles.sender}>{message.sender.name.first}, {message.sender.title}</Text>
                         </Body>
                         <Right>
