@@ -42,6 +42,7 @@ class Pricing extends React.Component<Props, State> {
 	      backgroundColor: '#CC0000',
 	      height: 65
 	    },
+      headerTintColor: '#FFFFFF',
 	    headerTitleStyle: {
 	       color: 'white',
 	    },
@@ -56,13 +57,13 @@ class Pricing extends React.Component<Props, State> {
       this.socket.emit('newQuestion', { 
         message: { 
           sender: associateId, 
-          recipient: '5a0bc7d431955b7fc51baeea', 
+          recipient: '5a151a66891ec8ea34d9622f', 
           text: this.state.myText
         },
         question: {
           text: this.state.myText,
           assigner: associateId,
-          assignee: '5a0bc7d431955b7fc51baeea',
+          assignee: '5a151a66891ec8ea34d9622f',
           category: category,
           status: 'open'
         }

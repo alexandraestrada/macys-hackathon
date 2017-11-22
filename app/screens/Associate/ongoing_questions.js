@@ -5,6 +5,7 @@ import {
   Platform,
   StyleSheet,
   Text,
+  TouchableWithoutFeedback,
   View,
   Image
 } from 'react-native';
@@ -16,41 +17,42 @@ import Tab3 from './resolved_questions';
 export interface State {}
 class Ongoing_Questions extends React.Component<Props, State> {
 	static navigationOptions = () => ({
-	    title: 'Ongoing Questions',
-	    headerStyle: {
-	      backgroundColor: '#CC0000',
-	      height: 65
-	    },
-	   	headerTitleStyle: {
-	       color: 'white',
-	    }
-	  });
-    constructor() {
-        super();
-        this.socket = SocketIOClient('https://young-brook-73094.herokuapp.com');
-        console.log('socket', this.socket)
-        console.log('this.state', this.state);
-  
-    }
+    headerStyle: {
+      backgroundColor: '#CC0000',
+      height: 65,
+    },
+    headerTintColor: '#FFFFFF',
+  });
 
-    componentDidMount() {
-      const associateId = this.props.navigation.state.params.associate._id;
+  constructor() {
+    super();
 
-      fetch('https://young-brook-73094.herokuapp.com/api/users/' + associateId + '/questions/assigner')
-        .then(response => response.json())
-        .then(responseJson => this.setState({ questions: responseJson }));
+    this.socket = SocketIOClient('https://young-brook-73094.herokuapp.com');
+  }
 
-      this.socket.on('questionSubmitted', ({ question }) => {
-        this.setState(prevState => { 
-          const newState = [question].concat(prevState.questions);
-          return {questions: newState};
-        })
+  componentDidMount() {
+    const associateId = this.props.navigation.state.params.associate._id;
+
+    fetch('https://young-brook-73094.herokuapp.com/api/users/' + associateId + '/questions/assigner')
+      .then(response => response.json())
+      .then(responseJson => this.setState({ questions: responseJson }));
+
+    this.socket.on('questionSubmitted', ({ question }) => {
+      this.setState(prevState => { 
+        const newState = [question].concat(prevState.questions);
+        return {questions: newState};
       })
-    }
+    })
+  }
 
-    goToQuestion = (question) => {
-      return this.props.navigation.navigate('Manager_Question', {questionId: question._id});
-    }
+  goToQuestion = (question) => {
+    return this.props.navigation.navigate('Associate_Question', {questionId: question._id});
+  }
+
+  convertTime = (time) => {
+    const date = new Date(time);
+    return date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+  }
 
 	render() {
     const { navigate } = this.props.navigation;
@@ -58,26 +60,31 @@ class Ongoing_Questions extends React.Component<Props, State> {
     return (
       <Container style={styles.container}>
         <Content>
-          <List>
-            {  this.state && this.state.questions.map((question, i) => {
+          <Text style={styles.welcome}>Ongoing Questions</Text>
+          <View style={styles.listContainer}>
+            { this.state && this.state.questions.map((question, i) => {
                 return (
-                    <ListItem avatar key={'list-item-' + i} onPress={() => this.goToQuestion(question)}>
-                        <Left>
-                            <Thumbnail source={{ uri: 'http://hr.macys.net/insite/images/logon6_welcome.jpg' }} />
-                        </Left>
-                        <Body>
-                            <Text>{question.assigner.name.first} {question.assigner.name.last}</Text>
-                            <Text note>{question.text}</Text>
-                        </Body>
-                        <Right>
-                            <Text note>3:43 pm</Text>
-                        </Right>
-                    </ListItem>
+                  <TouchableWithoutFeedback 
+                    key={'list-item-' + i} 
+                    onPress={() => this.goToQuestion(question)}
+                  >
+                    <View style={styles.listItem} >
+                      <Image 
+                        style={styles.image}
+                        source={{uri: question.assignee.image}}
+                      />
+                      <View>
+                        <Text style={styles.text} numberOfLines={1}>{ question.text }</Text>
+                        <Text style={styles.name}>{ question.assignee.name.first }</Text>
+                      </View>
+                      <Text style={styles.time}>{this.convertTime(question.created_at)}</Text>
+                    </View>
+                  </TouchableWithoutFeedback>
                 )
-                })
+              })
             }
-            </List>
-          </Content>
+          </View>
+        </Content>
       </Container>
     );
   }
@@ -97,9 +104,47 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   welcome: {
+    color: 'black',
     fontSize: 23,
     fontWeight: 'bold',
-    color: 'white',
+    paddingTop: 20,
+    paddingBottom: 20,
+    textAlign: 'center',
+  },
+  image: {
+    marginRight: 15,
+    height: 50,
+    width: 50,
+    borderRadius: 50/2,
+    borderWidth: 0.5,
+  },
+  listContainer: {
+    paddingRight: 20,
+    paddingLeft: 20,
+  },
+  listItem: {
+    borderBottomWidth: 1,
+    borderColor: '#DFE3E8',
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  text: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    paddingRight: 40,
+    width: 200,
+  },
+  name: {
+    fontSize: 18,
+    color: 'gray',
+  },
+  time: {
+    paddingTop: 20,
+    textAlign: 'right',
+    alignSelf: 'center',
   },
   list:{
     marginTop: -50,

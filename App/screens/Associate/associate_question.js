@@ -50,8 +50,8 @@ class Manager_Question extends React.Component<Props, State> {
       this.socket.emit('newMessage', { 
         questionId: this.state._id,
         message: { 
-          sender: this.state.assignee._id, 
-          recipient: this.state.assigner._id, 
+          sender: this.state.assigner._id, 
+          recipient: this.state.assignee._id, 
           text: this.state.inputText
         }
       });
@@ -92,7 +92,7 @@ class Manager_Question extends React.Component<Props, State> {
               { this.state && this.state.messages.map((message, i) => {
                   if (i > 0) {
                     return (
-                      this.state.assignee.associateId === message.sender.associateId
+                      this.state.assigner.associateId === message.sender.associateId
                       ? <View style={styles.messageContainer}>
                           <Image 
                             style={{
@@ -129,7 +129,7 @@ class Manager_Question extends React.Component<Props, State> {
                 })
               }
             </ScrollView>
-            <View style={{ paddingTop: 15 }}>
+            <View style={{paddingTop: 15}}>
               <View style={styles.suggestionContainer}>
                 <Button>Need more info</Button>
                 <Button>On my way</Button>

@@ -15,6 +15,7 @@ class Login extends React.Component {
 		return fetch('https://young-brook-73094.herokuapp.com/api/users/' + this.state.text)
 			.then((response) => response.json())
 			.then(responseJson => {
+				console.log('login response', responseJson)
 				if (responseJson[0].accountType === 'Associate') {
 					this.props.navigation.navigate('Get_Help', { associate: responseJson[0] });
 				} else {

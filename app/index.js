@@ -9,6 +9,7 @@ import Pricing from './screens/Associate/pricing';
 import New_Question from './screens/Associate/new_question'
 import Management_Landing from './screens/Manager/home';
 import Manager_Question from './screens/Manager/manager_question';
+import Associate_Question from './screens/Associate/associate_question';
 
 
 const App = StackNavigator({
@@ -26,6 +27,9 @@ const App = StackNavigator({
     },
     Manager_Question: {
         screen: Manager_Question
+    },
+    Associate_Question: {
+        screen: Associate_Question
     },
     Ongoing_Questions: { 
         screen: Ongoing_Questions 
