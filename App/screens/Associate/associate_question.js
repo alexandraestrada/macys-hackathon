@@ -199,7 +199,10 @@ const styles = StyleSheet.create({
   messageContainer: {
     flex: 1,
     flexDirection: 'row',
-    padding: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   message: {
     backgroundColor: '#F5F5F5',
