@@ -17,9 +17,11 @@ import Tab3 from './resolved_questions';
 export interface State {}
 class Ongoing_Questions extends React.Component<Props, State> {
   static navigationOptions = () => ({
+    title: 'My Questions',
     headerStyle: {
       backgroundColor: '#CC0000',
       height: 65,
+      fontSize: 28,
     },
     headerTintColor: '#FFFFFF',
   });
@@ -60,7 +62,9 @@ class Ongoing_Questions extends React.Component<Props, State> {
     return (
       <Container style={styles.container}>
         <Content>
-          <Text style={styles.welcome}>Ongoing Questions</Text>
+          <View style={styles.welcomeContainer}>
+            <Text style={styles.welcome}>Ongoing Questions </Text>
+          </View>
           <View style={styles.listContainer}>
             { this.state && this.state.questions.map((question, i) => {
                 return (
@@ -74,7 +78,7 @@ class Ongoing_Questions extends React.Component<Props, State> {
                         source={{uri: question.assigner.image}}
                       />
                       <View>
-                        <Text style={styles.text} numberOfLines={1}>{ question.text }</Text>
+                        <Text style={styles.text} numberOfLines={1}>{ question.category }</Text>
                         <Text style={styles.name}>{ question.assigner.name.first }</Text>
                       </View>
                       <Text style={styles.time}>{this.convertTime(question.created_at)}</Text>
@@ -103,13 +107,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
+  welcomeContainer: {
+    borderBottomWidth: 1,
+    borderColor: '#DFE3E8',
+    paddingRight: 20,
+    paddingLeft: 20,
+  },
   welcome: {
     color: 'black',
-    fontSize: 23,
+    fontSize: 20,
     fontWeight: 'bold',
     paddingTop: 20,
     paddingBottom: 20,
     textAlign: 'center',
+
   },
   image: {
     marginRight: 15,

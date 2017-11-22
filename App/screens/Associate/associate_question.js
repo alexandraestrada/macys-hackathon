@@ -92,7 +92,7 @@ class Manager_Question extends React.Component<Props, State> {
               { this.state && this.state.messages.map((message, i) => {
                   if (i > 0) {
                     return (
-                      this.state.assigner.associateId === message.sender.associateId
+                      this.state.assignee.associateId === message.sender.associateId
                       ? <View style={styles.messageContainer}>
                           <Image 
                             style={{
