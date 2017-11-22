@@ -57,7 +57,7 @@ class Get_Help extends React.Component<Props, State> {
 	                    <Image source={require('./../../../images/new_selected.png')} style={{height: 25, width: 28, marginBottom: 4}}/>
 	                    <Text style={styles.footerTextSelected}>New</Text>
 	                    </Button>
-	                    <Button onPress={() => this.props.navigation.navigate('Ongoing_Questions', {})}>
+	                    <Button onPress={() => this.props.navigation.navigate('Ongoing_Questions', { associate })}>
 	                    <Image source={require('./../../../images/ongoing_deselected.png')} style={{height: 27, width: 23, marginBottom: 4}}/>
 	                    <Text style={styles.footerText}>Ongoing</Text>
 	                    </Button>

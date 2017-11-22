@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   option:{
     backgroundColor: '#F4F6F8',
     height: 60,
-    width: 335,
+    width: 340,
     margin: 10,
     flex: 1,
     justifyContent: 'center',

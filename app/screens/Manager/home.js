@@ -23,7 +23,7 @@ class Manager_Landing extends React.Component {
     componentDidMount() {
 
         const userId = this.props.navigation.state.params.manager._id;
-        fetch('https://young-brook-73094.herokuapp.com/api/users/' + userId + '/questions')
+        fetch('https://young-brook-73094.herokuapp.com/api/users/' + userId + '/questions/assignee')
             .then(response => response.json())
             .then(responseJson => this.setState({ questions: responseJson}));
 
